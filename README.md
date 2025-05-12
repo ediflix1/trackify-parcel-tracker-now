@@ -1,73 +1,58 @@
-# Welcome to your Lovable project
 
-## Project info
+# ExpressTrack - Rastreamento de Encomendas
 
-**URL**: https://lovable.dev/projects/5345b212-02e3-4a2d-b7dd-f2d86da03a80
+Sistema de rastreamento de encomendas simples e eficiente.
 
-## How can I edit this code?
+## Estrutura do Projeto
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/5345b212-02e3-4a2d-b7dd-f2d86da03a80) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+/ (raiz do projeto)
+├── public/
+│   ├── index.html     # Página HTML principal
+│   ├── style.css      # Estilos CSS globais
+│   ├── script.js      # JavaScript para inicialização
+│   └── favicon.ico    # Ícone do site
+├── src/               # Código fonte React
+│   ├── components/    # Componentes React
+│   ├── pages/         # Páginas da aplicação
+│   ├── services/      # Serviços e APIs
+│   └── ...            # Outros arquivos e pastas
+└── README.md          # Este arquivo
 ```
 
-**Edit a file directly in GitHub**
+## Desenvolvimento
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Este projeto utiliza React com Vite para desenvolvimento rápido.
 
-**Use GitHub Codespaces**
+### Requisitos
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Node.js 16+
+- npm ou yarn
 
-## What technologies are used for this project?
+### Instalação
 
-This project is built with:
+```bash
+npm install
+# ou
+yarn install
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Execução
 
-## How can I deploy this project?
+```bash
+npm run dev
+# ou
+yarn dev
+```
 
-Simply open [Lovable](https://lovable.dev/projects/5345b212-02e3-4a2d-b7dd-f2d86da03a80) and click on Share -> Publish.
+## Produção
 
-## Can I connect a custom domain to my Lovable project?
+Para construir a versão de produção:
 
-Yes, you can!
+```bash
+npm run build
+# ou
+yarn build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Os arquivos gerados estarão na pasta `dist/`.
