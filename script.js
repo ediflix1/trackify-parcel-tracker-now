@@ -1,3 +1,5 @@
 
-// This file exists to redirect to public/script.js
-import "./public/script.js";
+// Import the React application
+import './src/main.tsx';
+
+console.log('ExpressTrack initialized');

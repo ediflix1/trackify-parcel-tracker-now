@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -36,6 +37,52 @@ const mockShipments: Shipment[] = [
     additionalInfo: 'Objeto foi postado de Natal/RN para Uberlândia, Minas Gerais'
   }
 ];
+
+const ShipmentCard = ({ shipment, onTrack }: { shipment: Shipment, onTrack: (code: string) => void }) => {
+  return (
+    <div key={shipment.id} className="p-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className="font-medium text-delivery-primary">{shipment.trackingCode}</span>
+            <span className={`px-2 py-1 text-xs rounded-full ${
+              shipment.status === 'Em trânsito' 
+                ? 'bg-blue-100 text-blue-800' 
+                : 'bg-yellow-100 text-yellow-800'
+            }`}>
+              {shipment.status}
+            </span>
+          </div>
+          <p className="text-lg font-semibold">{shipment.description}</p>
+          <p className="text-sm text-gray-500">
+            De: {shipment.origin} • Para: {shipment.destination}
+          </p>
+          {shipment.additionalInfo && (
+            <p className="text-sm text-blue-600 font-medium">
+              {shipment.additionalInfo}
+            </p>
+          )}
+          <p className="text-sm text-gray-500">
+            Atualizado em: {format(shipment.updatedAt, 'dd/MM/yyyy')} às {format(shipment.updatedAt, 'HH:mm')}
+          </p>
+        </div>
+        
+        <div className="flex flex-col gap-2">
+          <p className="text-sm">
+            Entrega prevista: <span className="font-medium">{format(shipment.estimatedDelivery, 'dd/MM/yyyy')}</span>
+          </p>
+          <Button 
+            variant="outline" 
+            className="border-delivery-primary text-delivery-primary hover:bg-delivery-light"
+            onClick={() => onTrack(shipment.trackingCode)}
+          >
+            Rastrear
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -143,47 +190,11 @@ const Dashboard: React.FC = () => {
               {shipments.length > 0 ? (
                 <div className="divide-y">
                   {shipments.map((shipment) => (
-                    <div key={shipment.id} className="p-6">
-                      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium text-delivery-primary">{shipment.trackingCode}</span>
-                            <span className={`px-2 py-1 text-xs rounded-full ${
-                              shipment.status === 'Em trânsito' 
-                                ? 'bg-blue-100 text-blue-800' 
-                                : 'bg-yellow-100 text-yellow-800'
-                            }`}>
-                              {shipment.status}
-                            </span>
-                          </div>
-                          <p className="text-lg font-semibold">{shipment.description}</p>
-                          <p className="text-sm text-gray-500">
-                            De: {shipment.origin} • Para: {shipment.destination}
-                          </p>
-                          {shipment.additionalInfo && (
-                            <p className="text-sm text-blue-600 font-medium">
-                              {shipment.additionalInfo}
-                            </p>
-                          )}
-                          <p className="text-sm text-gray-500">
-                            Atualizado em: {format(shipment.updatedAt, 'dd/MM/yyyy')} às {format(shipment.updatedAt, 'HH:mm')}
-                          </p>
-                        </div>
-                        
-                        <div className="flex flex-col gap-2">
-                          <p className="text-sm">
-                            Entrega prevista: <span className="font-medium">{format(shipment.estimatedDelivery, 'dd/MM/yyyy')}</span>
-                          </p>
-                          <Button 
-                            variant="outline" 
-                            className="border-delivery-primary text-delivery-primary hover:bg-delivery-light"
-                            onClick={() => handleTrackShipment(shipment.trackingCode)}
-                          >
-                            Rastrear
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                    <ShipmentCard 
+                      key={shipment.id} 
+                      shipment={shipment} 
+                      onTrack={handleTrackShipment} 
+                    />
                   ))}
                 </div>
               ) : (

@@ -28,7 +28,7 @@ const getTrackingData = (code: string) => {
           status: 'Objeto postado',
           location: 'Agência dos Correios - Natal, RN',
           date: currentDate,
-          time: '18:45',
+          time: format(currentDate, 'HH:mm'),
           description: 'Objeto foi postado de Natal/RN para Uberlândia, Minas Gerais'
         }
       ]
@@ -55,7 +55,6 @@ const getTrackingData = (code: string) => {
 
 const TrackingResult: React.FC<TrackingResultProps> = ({ trackingCode }) => {
   const trackingData = getTrackingData(trackingCode);
-  const today = new Date();
   
   return (
     <div className="w-full max-w-3xl mx-auto space-y-6">

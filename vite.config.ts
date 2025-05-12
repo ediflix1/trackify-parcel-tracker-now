@@ -20,10 +20,15 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Explicitly set publicDir to ensure public files are served from the root
+  // Correctly configure public path and build
   publicDir: "public",
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      }
+    }
   },
 }));
