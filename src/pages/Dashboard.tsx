@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,7 +16,11 @@ interface Shipment {
   destination: string;
   updatedAt: Date;
   estimatedDelivery: Date;
+  additionalInfo?: string;
 }
+
+// Data específica de entrega - 20/05/2024
+const specificDate = new Date(2024, 4, 20); // Mês é baseado em zero (0-11), então 4 = maio
 
 // Dados fictícios de envios
 const mockShipments: Shipment[] = [
@@ -26,10 +29,11 @@ const mockShipments: Shipment[] = [
     trackingCode: 'AO5467860076BRN',
     description: 'Pacote Eletrônico',
     status: 'Em trânsito',
-    origin: 'São Paulo, SP',
+    origin: 'Natal, RN',
     destination: 'Uberlândia, MG',
     updatedAt: new Date(),
-    estimatedDelivery: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000), // 3 dias a partir de hoje
+    estimatedDelivery: specificDate,
+    additionalInfo: 'Objeto foi postado de Natal/RN para Uberlândia, Minas Gerais'
   },
   {
     id: '2',
@@ -166,6 +170,11 @@ const Dashboard: React.FC = () => {
                           <p className="text-sm text-gray-500">
                             De: {shipment.origin} • Para: {shipment.destination}
                           </p>
+                          {shipment.additionalInfo && (
+                            <p className="text-sm text-blue-600 font-medium">
+                              {shipment.additionalInfo}
+                            </p>
+                          )}
                           <p className="text-sm text-gray-500">
                             Atualizado em: {format(shipment.updatedAt, 'dd/MM/yyyy')} às {format(shipment.updatedAt, 'HH:mm')}
                           </p>

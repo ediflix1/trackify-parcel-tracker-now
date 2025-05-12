@@ -15,17 +15,21 @@ const getTrackingData = (code: string) => {
   
   // Caso específico para o código mencionado
   if (code === 'AO5467860076BRN') {
+    // Data específica de entrega - 20/05/2024
+    const specificDate = new Date(2024, 4, 20); // Mês é baseado em zero (0-11), então 4 = maio
+    
     return {
       status: 'Em trânsito',
-      origin: 'Centro de Distribuição - São Paulo, SP',
+      origin: 'Centro de Distribuição - Natal, RN',
       destination: 'Uberlândia, Minas Gerais',
-      estimatedDelivery: new Date(currentDate.getTime() + 3 * 24 * 60 * 60 * 1000), // 3 dias a partir de hoje
+      estimatedDelivery: specificDate,
       updates: [
         {
           status: 'Objeto postado',
-          location: 'Agência dos Correios - São Paulo, SP',
+          location: 'Agência dos Correios - Natal, RN',
           date: currentDate,
-          time: '18:45'
+          time: '18:45',
+          description: 'Objeto foi postado de Natal/RN para Uberlândia, Minas Gerais'
         }
       ]
     };
@@ -42,7 +46,8 @@ const getTrackingData = (code: string) => {
         status: 'Objeto em processamento',
         location: 'Centro de Distribuição',
         date: currentDate,
-        time: format(currentDate, 'HH:mm')
+        time: format(currentDate, 'HH:mm'),
+        description: 'Objeto em processamento'
       }
     ]
   };
@@ -122,6 +127,7 @@ const TrackingResult: React.FC<TrackingResultProps> = ({ trackingCode }) => {
                     </p>
                   </div>
                   <p className="text-gray-600">{update.location}</p>
+                  <p className="text-gray-700 mt-1 font-medium">{update.description}</p>
                 </div>
               </div>
             ))}

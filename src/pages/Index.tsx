@@ -1,14 +1,30 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import TrackingForm from '@/components/TrackingForm';
 import TrackingResult from '@/components/TrackingResult';
 import { useToast } from "@/components/ui/use-toast";
 import { Package, Truck, MapPin } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const Index = () => {
   const { toast } = useToast();
+  const location = useLocation();
   const [trackingCode, setTrackingCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Parse URL params to get tracking code if provided
+    const searchParams = new URLSearchParams(location.search);
+    const trackingParam = searchParams.get('tracking');
+    if (trackingParam) {
+      setTrackingCode(trackingParam);
+      toast({
+        title: "Buscando informações",
+        description: `Rastreando código ${trackingParam}...`,
+        duration: 2000,
+      });
+    }
+  }, [location.search, toast]);
 
   const handleTrackingSubmit = (code: string) => {
     setTrackingCode(code);

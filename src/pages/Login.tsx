@@ -102,12 +102,6 @@ const Login: React.FC = () => {
               >
                 {isLoading ? "Processando..." : "Entrar"}
               </Button>
-              
-              <div className="text-center text-sm text-gray-500">
-                <p>Use o login:</p>
-                <p className="font-medium">Usuário: patrick hernand</p>
-                <p className="font-medium">Senha: 01320313612</p>
-              </div>
             </form>
           </CardContent>
         </Card>
