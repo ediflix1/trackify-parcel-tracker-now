@@ -22,7 +22,7 @@ interface Shipment {
 // Data específica de entrega - 20/05/2024
 const specificDate = new Date(2024, 4, 20); // Mês é baseado em zero (0-11), então 4 = maio
 
-// Dados fictícios de envios
+// Dados fictícios de envios - apenas uma encomenda conforme solicitado
 const mockShipments: Shipment[] = [
   {
     id: '1',
@@ -34,16 +34,6 @@ const mockShipments: Shipment[] = [
     updatedAt: new Date(),
     estimatedDelivery: specificDate,
     additionalInfo: 'Objeto foi postado de Natal/RN para Uberlândia, Minas Gerais'
-  },
-  {
-    id: '2',
-    trackingCode: 'BP6578910234BRN',
-    description: 'Documentos Importantes',
-    status: 'Aguardando postagem',
-    origin: 'Rio de Janeiro, RJ',
-    destination: 'Belo Horizonte, MG',
-    updatedAt: new Date(),
-    estimatedDelivery: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000), // 5 dias a partir de hoje
   }
 ];
 

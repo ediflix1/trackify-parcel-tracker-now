@@ -4,6 +4,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Search } from 'lucide-react';
+import { useToast } from "@/hooks/use-toast";
+import { authService } from '@/services/authService';
+import { useNavigate } from 'react-router-dom';
 
 interface TrackingFormProps {
   onSubmit: (trackingCode: string) => void;
@@ -12,6 +15,8 @@ interface TrackingFormProps {
 const TrackingForm: React.FC<TrackingFormProps> = ({ onSubmit }) => {
   const [trackingCode, setTrackingCode] = useState('');
   const [isError, setIsError] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +27,22 @@ const TrackingForm: React.FC<TrackingFormProps> = ({ onSubmit }) => {
     }
     
     setIsError(false);
+    
+    // Check if user is logged in
+    if (!authService.isAuthenticated()) {
+      toast({
+        title: "Acesso restrito",
+        description: "Você precisa fazer login para acessar suas encomendas",
+        duration: 5000,
+      });
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+      
+      return;
+    }
+    
     onSubmit(trackingCode.trim());
   };
   
