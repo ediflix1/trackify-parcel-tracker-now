@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import TrackingForm from '@/components/TrackingForm';
 import TrackingResult from '@/components/TrackingResult';
 import { useToast } from "@/components/ui/use-toast";
+import { Package, Truck, MapPin } from 'lucide-react';
 
 const Index = () => {
   const { toast } = useToast();
